@@ -38,6 +38,11 @@
       margin: 0.5rem 0;
       font-size: 1rem;
       outline: none;
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+    }
+    input:focus {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      transform: scale(1.03);
     }
     button {
       width: 100%;
@@ -81,9 +86,9 @@
 <body>
   <div class="calculator-card">
     <h1>VAT & Commission Calculator</h1>
-    <input type="number" id="price" placeholder="Product Price (€)" value="208"/>
-    <input type="number" id="vat" placeholder="VAT (%)" value="23"/>
-    <input type="number" id="commission" placeholder="Commission Rate (%)" value="3"/>
+    <input type="number" id="price" placeholder="Product Price (€)"/>
+    <input type="number" id="vat" placeholder="VAT (%)"/>
+    <input type="number" id="commission" placeholder="Commission Rate (%)"/>
     <button onclick="calculate()">Calculate</button>
     <div id="result"></div>
   </div>
@@ -99,11 +104,9 @@
         return;
       }
 
-      // Calculate VAT-exempt price and commission (same as your Python logic)
       const vatExemptPrice = price / (1 + vatPercent / 100);
       const commission = vatExemptPrice * (commissionPercent / 100);
 
-      // Build result table similar to your DataFrame
       const tableHTML = `
         <table class="result-table">
           <tr><th>Product Price (€)</th><td>€${price.toFixed(2)}</td></tr>
